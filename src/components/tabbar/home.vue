@@ -1,22 +1,17 @@
 <template>
 
     <div>
-        <mt-swipe :auto="4000">
-            <!-- 在组件中，使用 v-for 循环的话，一定要使用 key -->
-            <mt-swipe-item v-for="item in list" :key="item.img">
-                <img :src="item.img" alt="">
-            </mt-swipe-item>
-        </mt-swipe>
+       <com :list="list" :istrue="istrue"></com>
         <ul class="mui-table-view mui-grid-view mui-grid-9">
-            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/newline">
                 <img src="../../images/menu1.png" alt=""/>
-                <div class="mui-media-body">Home</div></a></li>
-            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+                <div class="mui-media-body">鏂伴椈鍒楄〃</div></router-link></li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to ="/home/photo">
                 <img src="../../images/menu2.png" alt=""/>
-                <div class="mui-media-body">Email</div></a></li>
-            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+                <div class="mui-media-body">鍥剧墖鍒嗕韩</div></router-link></li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/shops">
                 <img src="../../images/menu3.png" alt=""/>
-                <div class="mui-media-body">Chat</div></a></li>
+                <div class="mui-media-body">鍟嗗搧璐拱</div></router-link></li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
                 <img src="../../images/menu4.png" alt=""/>
                 <div class="mui-media-body">location</div></a></li>
@@ -34,10 +29,12 @@
 </template>
 
 <script>
+    import com from '../shop/lbpicture.vue'
     export default{
         data:function(){
             return {
-                list:[]
+                list:[],
+                istrue:true
             }
         },
         created:function(){
@@ -45,32 +42,25 @@
         },
         methods:{
             getimg:function(){
-                this.$http.get('http://vue.studyit.io/api/getlunbo').then(function(result){
+                this.$http.get('api/getlunbo').then(function(result){
                     console.log(result.body)
                     if(result.body.status == 0){
                         this.list = result.body.message;
                     }else{
-                        Toast("加载轮播图失败……");
+                        Toast("鍔犺浇澶辫触");
                     }
                 })
             }
+        },
+        components:{
+            'com':com
         }
     }
 
 
 </script>
 <style lang="scss" scoped>
-    .mint-swipe {
-        height: 200px;
 
-    .mint-swipe-item {
-
-    img {
-        width: 100%;
-        height: 100%;
-    }
-    }
-    }
     .mui-grid-view.mui-grid-9 {
         background-color: #fff;
         border: none;
