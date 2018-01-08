@@ -117,10 +117,16 @@
           },
           getcount:function(count){
                 this.count = count;
-              console.log(count)
          },
               add:function(){
                   this.flag = !this.flag;
+                  var info = {
+                      id: this.id,
+                      count: this.count,
+                      price: this.arr.sell_price,
+                      selected: true
+                  }
+                  this.$store.commit("addcar",info)
           }
 
       },
